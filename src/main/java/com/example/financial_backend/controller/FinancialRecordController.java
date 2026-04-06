@@ -22,10 +22,10 @@ public class FinancialRecordController {
         return financialRecordService.createRecord(financialRecord);
     }
 
-    @GetMapping
-    public List<FinancialRecord> getAllRecords(){
-        return financialRecordService.getAllRecords();
-    }
+//    @GetMapping
+//    public List<FinancialRecord> getAllRecords(){
+//        return financialRecordService.getAllRecords();
+//    }
 
     @GetMapping("/{id}")
     public FinancialRecord getRecordById(@PathVariable long id){
