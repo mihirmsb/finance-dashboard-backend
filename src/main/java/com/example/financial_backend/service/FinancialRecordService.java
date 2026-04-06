@@ -1,8 +1,11 @@
 package com.example.financial_backend.service;
 
+import com.example.financial_backend.dto.FinancialRecordDTO;
 import com.example.financial_backend.model.FinancialRecord;
+import com.example.financial_backend.model.User;
 import com.example.financial_backend.model.enums.RecordType;
 import com.example.financial_backend.repo.FinancialRecordRepo;
+import com.example.financial_backend.repo.UserRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,6 +17,9 @@ public class FinancialRecordService {
 
     @Autowired
     private FinancialRecordRepo financialRecordRepo;
+
+    @Autowired
+    private UserRepo userRepo;
 
     public FinancialRecord createRecord(FinancialRecord financialRecord){
         return financialRecordRepo.save(financialRecord);
@@ -57,4 +63,35 @@ public class FinancialRecordService {
         financialRecordRepo.deleteById(id);
     }
 
+//    public FinancialRecord convertToEntity(FinancialRecordDTO dto) {
+//
+//        FinancialRecord record = new FinancialRecord();
+//
+//        record.setId(dto.getId());
+//        record.setAmount(dto.getAmount());
+//        record.setType(dto.getType());
+//        record.setCategory(dto.getCategory());
+//        record.setDate(dto.getDate());
+//        record.setNotes(dto.getNotes());
+//
+//        User user = userRepo.findById(dto.getUserId())
+//                .orElseThrow(() -> new RuntimeException("User not found"));
+//
+//        record.setCreatedBy(user);
+//
+//        return record;
+//    }
+//
+//    public FinancialRecordDTO convertToDTO(FinancialRecord record) {
+//
+//        return FinancialRecordDTO.builder()
+//                .id(record.getId())
+//                .amount(record.getAmount())
+//                .type(record.getType())
+//                .category(record.getCategory())
+//                .date(record.getDate())
+//                .notes(record.getNotes())
+//                .userId(record.getCreatedBy().getId())
+//                .build();
+//    }
 }
