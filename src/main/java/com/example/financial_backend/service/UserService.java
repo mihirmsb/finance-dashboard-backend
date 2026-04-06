@@ -34,7 +34,7 @@ public class UserService {
             user.setStatus(updatedUser.getStatus());
             return userRepo.save(user);
         }
-        return null;
+        throw new RuntimeException("User not found");
     }
 
     public void deleteUserById(long id) {

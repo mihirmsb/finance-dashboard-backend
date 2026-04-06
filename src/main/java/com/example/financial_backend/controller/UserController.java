@@ -2,6 +2,8 @@ package com.example.financial_backend.controller;
 
 import com.example.financial_backend.model.User;
 import com.example.financial_backend.service.UserService;
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -15,7 +17,7 @@ public class UserController {
     private UserService userService;
 
     @PostMapping
-    public User createUser(@RequestBody User user) {
+    public User createUser(@Valid @RequestBody User user) {
         return userService.createUser(user);
     }
 
@@ -30,7 +32,7 @@ public class UserController {
     }
 
     @PutMapping("/{id}")
-    public User updateUser(@PathVariable long id,@RequestBody User user){
+    public User updateUser(@Valid @PathVariable long id,@RequestBody User user){
         return userService.updateUser(id, user);
     }
 

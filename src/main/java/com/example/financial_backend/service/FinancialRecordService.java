@@ -50,7 +50,7 @@ public class FinancialRecordService {
             financialRecord.setNotes(updatedFinancialRecord.getNotes());
             return financialRecordRepo.save(financialRecord);
         }
-        return null;
+        throw new RuntimeException("Record not found");
     }
 
     public void deleteRecordById(long id){

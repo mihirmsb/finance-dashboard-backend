@@ -4,6 +4,7 @@ package com.example.financial_backend.controller;
 import com.example.financial_backend.model.FinancialRecord;
 import com.example.financial_backend.model.enums.RecordType;
 import com.example.financial_backend.service.FinancialRecordService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,7 +19,7 @@ public class FinancialRecordController {
     private FinancialRecordService financialRecordService;
 
     @PostMapping
-    public FinancialRecord createRecord(@RequestBody FinancialRecord financialRecord){
+    public FinancialRecord createRecord(@Valid @RequestBody FinancialRecord financialRecord){
         return financialRecordService.createRecord(financialRecord);
     }
 
@@ -52,7 +53,7 @@ public class FinancialRecordController {
     }
 
     @PutMapping("/{id}")
-    public FinancialRecord updateRecord(@PathVariable long id, @RequestBody FinancialRecord updatedFinancialRecord){
+    public FinancialRecord updateRecord(@Valid @PathVariable long id, @RequestBody FinancialRecord updatedFinancialRecord){
         return financialRecordService.updateRecord(id, updatedFinancialRecord);
     }
 
