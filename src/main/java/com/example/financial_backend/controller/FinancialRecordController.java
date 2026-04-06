@@ -2,10 +2,12 @@ package com.example.financial_backend.controller;
 
 
 import com.example.financial_backend.model.FinancialRecord;
+import com.example.financial_backend.model.enums.RecordType;
 import com.example.financial_backend.service.FinancialRecordService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @RestController
@@ -28,6 +30,25 @@ public class FinancialRecordController {
     @GetMapping("/{id}")
     public FinancialRecord getRecordById(@PathVariable long id){
         return financialRecordService.getRecordById(id);
+    }
+
+    @GetMapping
+    public List<FinancialRecord> getRecords(
+            @RequestParam(required = false) RecordType type,
+            @RequestParam(required = false) String category,
+            @RequestParam(required = false) String startDate,
+            @RequestParam(required = false) String endDate
+    ) {
+        LocalDate start = null;
+        LocalDate end = null;
+
+        if (startDate != null && endDate != null) {
+            start = LocalDate.parse(startDate);
+            end = LocalDate.parse(endDate);
+        }
+
+        return financialRecordService.getFilteredRecords(type, category, start, end);
+
     }
 
     @PutMapping("/{id}")
